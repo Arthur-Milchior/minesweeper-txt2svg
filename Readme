@@ -1,0 +1,15 @@
+This program takes a list of argument, which are name of files and compile them to minesweeper fields in svg.
+Each output name is equal to the name of the input, with .svg added as extension.
+
+
+Each line in the text descirption correspond to a line in the minesweeper.
+A number from 0 to 8 corresponds to the same number shown on the field.
+. corresponds to a bomb warning.
+_ corresponds to an empty case whose limit must be drawn.
+Empty spaces are not considered. Hence even the limit of their cases are not drawn.
+
+
+
+Letters non standard in minesweepers, but usefull for the purpose of the author can also be used.
+… or , corresponds to three horizontal dots. 
+⋮ or :, corresponds to three vertical dots.
