@@ -16,7 +16,11 @@ for input_file in argv[1:]:
         "3":"red",
         "4":"cyan",
         "5":"pink",
-        "_": "white"}
+        "6":"purple",
+        "7":"orange",
+        "8":"black",
+        "_": "white",
+        "?": "red"}
     if c==".":
         x=size*(col+.5)
         y=size*(line+.5)

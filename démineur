@@ -1,0 +1,231 @@
+J'ai souvent entendu la blague suivante quand j'apprenais à
+programmer. Tu donnes à un robot un paquet de pâte, une casserolle,
+une plaque chauffante, et un robinet d'eau. Puis tu lui apprend
+comment faire des pâtes. Quelques jours plus tard, tu demandes au
+robot de faire des pâtes, en lui disant qu'il y a de l'eau bouillante
+dans la casserrolle. Tu vois alors le robot vider la casserrolle dans
+l'évier. Quand tu lui demandes pourquoi, il te répond que, pour faire
+des pâtes, on lui a dit qu'il fallait commencer avec une casserole
+vide. Totalement logique, le robot commence par vider la
+casserole. 
+
+<h4>Réduction</h4>
+
+Un informaticien parlerai de {réduction}. Le robot à
+réduit le problème "Faire des pâtes à partir d'une casserolle pleine
+d'eau" vers le problème "faire des pâtes à partir d'une casserolle
+vide".
+
+Intuitivement, une réduction, ça veut dire que, à partir de la
+première situation, tu peux atteindre la seconde facilement.  Dans
+l'exemple fictif ci-dessus, la réduction ne présente aucun intérêt
+pour un humain. Un humain omettra les premières étapes de la recette,
+et commencera à la casserolle pleine.
+
+Peut-être que le robot ne sait pas comment ignorer des
+étapes. L'utilisateur du robot devra alors choisir entre deux
+solution: apprendre au robot à faire des pâtes à partir d'une
+casserolle pleine. Ou bien utiliser la réduction vu ci-dessus. Avec la
+réduction, le robot perd un peu de temps, mais l'utilisateur en gagne.
+
+
+
+Plaçon nous maintenant dans un cadre encore plus fictif. Celui où l'on
+ne sait pas comment faire cuire des pâtes. La réduction ci-dessus
+présent encore un intérêt. Elle a permis de montrer que cuire des
+pâtes à partir d'une casserolle pleine n'est pas beaucoup plus
+compliqué que de cuire des pâtes à partir d'une casserolle
+vide.   Ainsi, le jour où l'on saura cuire des pâtes à partir d'une
+casserole vide, on aura aussi appris à cuire des pâtes à partir d'une
+casserole pleine. Notre réduction aura donc fait gagner du temps aux
+chercheurs futurs, en leur permettant d'étudier un seul problème au
+lieu d'en étudier deux.
+
+<h4>Équivalence</h4>
+Encore mieux: remarquons qu'en remplissant la casserole, on obtient
+une casserole pleine ! On a alors réduit le problème «faire des pâtes
+à partir d'une casserole vide» à «faire des pâtes
+à partir d'une casserole pleine». Puisqu'on a réduit chaque problèmes
+à l'autre, on voit que ces problèmes sont équivalents.
+
+Il y a toute une branche de la recherche en informatique - la théorie
+de la complexité (computational complexity theory) - qui consiste à
+étudier les réductions et les équivalences. Plus précisément, cette
+théorie s'intéresse au problème extrémement complexe de montrer que
+certaines réductions ne peuvent pas exister.
+
+{{{Exemple d'équivalence}}}
+
+En écrivant cet article, je suppose que l'exemple des pâtes n'a pas
+convaincu grand monde. Probablement car les deux problèmes sont trop
+similaires.  Je m'en vais donc vous proposer un exemple d'équivalence
+entre deux problèmes qui, à priori, n'ont rien à voir l'un avec
+l'autre. 
+
+<h4>Le démineur</h4>
+
+Le premier problème qui va m'intéresser est le jeu du
+démineur. Au cas où vous n'ayez pas joué au démineur depuis longtemps,
+voir jamais joué au démineur, je me permet un petit rappel du problème.
+
+Un plateau de démineur consiste en un grand tableau. Certaines cases
+de ce tableau contiennent une bombe cachée. Les cases sans bombe
+cachées peuvent contenir un nombre entre 0 et 8 qui indiquent le
+nombre de bombes cachés dans les 8 cases adjacentes. La question est
+donc la suivante: on vous donne un tableau de démineur, et on vous
+montre une case, en position $(n,m)$. Pouvez vous affirmer «la case
+$(n,m)$ peut contenir une bombe cachée» ? Un joueur aura besoin de
+savoir répondre à cette question pour décider s'il peut ou non cliquer
+sur la case, pour réveler le chiffre et avancer dans le jeu. Ou bien
+si cette case est dangereuse et doit être évité autant que possible.
+
+Dans le jeu classique, le 0 n'est jamais écrit. À la place, une case
+vide enfoncée est montré. Un compteur indique le nombre de bombe
+cachée sur le plateau.  De plus, le joueur peut placer des drapeau
+pour indiquer les bombes qu'il a repéré avec certitudes. Pour
+simplifier cet article, on ignorera tout cela.
+
+<H4>La logique propositionnelle</h4>
+Le second problème qui m'intéresse s'appelle «satisfiabilité de la
+logique propositionnel». Intuitivement, on vous dit «je veux que ça,
+ça, ça et ça, à la fois.», et vous devez trouver s'il est possible de
+satisfaire cette demande.
+
+Un exemple des plus standard est le suivant: vous voulez prendre un
+bain et regarder la télé. Sachant que la baignore est dans la salle de
+bain. Que la télé est dans le salon. Et que vous ne pouvez pas être
+dans plus d'une seule pièce à la fois.
+
+Rajoutons un peu de formalisme mathématique. Indiquer que le bain est
+dans la salle de bain se dirait ($P_{\text{bain}}$ implique
+$P_{\text{salle de bain}}$). Similairement, indiquer que la télé est
+dans le salon se dirait ($P_{\text{télé}}$ implique
+$P_{\text{salon}}$). Enfin, indiquer qu'on ne peut pas être dans deux
+pièce à la fois se dirait ((non $P_{\text{salle de bain}}$) ou (non
+$P_{\text{salon}}$)).
+
+Une fois qu'on a utilisé ce formalisme, on peut raccourcir implique,
+et remplacer "bain" par 1, salle de bain par 2, salon par 3 et télé
+par 4. Cela donne le problème:
+-($P_1$ implique $P_2$)
+-($P_4$ implique $P_3$)
+-((non $P_2$) ou (non $P_4$)).
+Ce problème peut ensuite être passé à un logiciel de logique
+propositionnel, qui vous répondra rapidement qu'il n'y a aucune
+solution à ce problème. 
+
+<H4>Réduction du démineur vers la logique propositionnel </H4>
+
+Je vais maintenant reprendre l'exemple du démineur, et montrer
+rapidement comment le réduire à la logique propositionnelle. Un
+informaticien voulant faire une réelle réduction devrait considérer
+énormément de détail, tel que les bords du plateau. Puisque l'on est
+dans un article de vulgarisation, l'idée sera simplement esquissée.
+
+Notre formule logique aura une proposition par case $(i,j)$. Et chaque
+proposition sera simplement l'affirmation «il y a une bombe en case
+$(i,j)$».  On rajoutera ensuite les propriétées suivante:
+-Toutes les cases $(i,j)$ qui contiennent un nombre ne contiennent pas de bombe
+-Chaque case avec un nombre, disons 5, possède très exactement 5 voisins avec une bombe.
+-La case $(n,m)$ contient une bombe.
+
+Pour rappel, la case $(n,m)$ est la case qui nous intéresse. Celle sur
+laquelle on aimerait savoir si on peut être sûr qu'il n'y a pas de
+bombe. Si le programme de logique propositionnelle nous indique «tout
+ça peut être satisfait» alors vous savez qu'il peut y avoir une bombe
+en case $(n,m)$. Donc vous devriez éviter de cliquer sur cette case si
+vous voulez éviter de perdre. Par contre, si le programme vous répond
+que tout cela n'est pas satisfiable, cela signifie qu'il est
+impossible qu'il y ait une bombe dans cette case, donc vous pouvez
+cliquer dessus sans aucun risque.
+
+En pratique, quelqu'un qui voudrait créer un programme qui joue au
+démineur aura intérêt à utiliser cette réduction. Au lieu de
+programmer «à la main» un algorithme pour le démineur, cela lui
+permettra de réutiliser les programmes de logiques
+propositionnelle. Cette réduction est très rapide à faire, tandis que
+devoir réécrire à la main toutes les règles pour décider si la case
+$(n,m)$ peut contenir une bombe ou non - ce qui est potentiellement
+influencé par des chiffres présent très loin de la case $(n,m)$,
+risque d'être très compliqué à faire.
+
+<h4>Réduction de la logique propositionnelle au démineur</h4>
+
+Je vais maintenant tenter de vous indiquer comment on peut utiliser le
+démineur pour résoudre des questions logiques.
+
+<h5>Proposition</h5>
+En logique, tout ce qu'on considère et soit vrai, soit faux. Ça ne
+peut pas être juste «un peu vrai». Pour chaque proposition $P$, on va
+choisir deux cases du démineur, on décide que l'une contient une bombe
+si $P$ est vrai, et l'autre si $P$ est faux. Les contraintes du
+démineur (img variable) nous permettent de nous assure que exactement
+une de ces cases contient une bombe cachées.  Toute personne sachant
+lire un plateau de démineur verra qu'il y a nécessairement une unique
+bombe quelque part dans ces deux cases libres. Et qu'il est impossible
+de savoir dans quel case il y a une bombe sans avoir d'information sur
+ce qui est autour de ce petit plateau.
+
+<h5>Fil</h5>
+Le démineur ne contient que des contraintes «locales». Chaque chiffre
+influence les 8 cases autour de lui et rien d'autre. On a expliqué au
+dessus comment encoder les propositions. Mais cela ne servirait à rien
+si ces propositions n'influençait qu'un endroit précis du plateau. On
+va donc créer des sortes de «fils électriques» en démineur, qui vont
+permettre de copier la valeur «vraie» ou «fausse» plus loin dans le
+circuit.
+
+(img fil) Sur l'image ci-contre, on peut voir que, si dans une paire,
+la case de gauche à une bombe, alors la case de gauche de toutes les
+paires à une bombe. Et pareil si la bombe est sur la case de droite.
+On a donc, intuitivement, de quoi propager la valeur Vraie ou Fausse.
+
+<h5>Opération</h5>
+En logique propositionnel, on peut considérer les opérations «non» et
+«et». C'est à dire transformer un vrai en faux et réciproquement. Et
+prendre deux valeurs, et verifier si les valeurs sont toutes les deux
+vraies. Le «non» n'est pas très compliqué à vérifier, le «et» par
+contre, et une prouesse plutôt impressionnante. (img non) (img et).
+
+<h5>Fin de la réduction</h5>
+Une fois que votre formule propositionnelle est totalement encodé dans
+un jeu de démineur, vous pouvez vous demander "Est-ce qu'il peut y
+avoir une bombe dans la position qui représente Vraie pour la formule
+entière". Si oui, alors la formule est satisfiable, sinon la formule
+n'est pas satisfiable. Et vous avez réduit le problème de la logique
+propositionnelle à la satisfiabilité.
+
+(Pour des raisons techniques, il faut savoir dupliquer une valeur, faire
+ce croiser des fils de deux valeurs, décaler une valeur de 1. Tout
+cela est fait dans les images ci-contre.)
+
+Bien sûr, quand un logicien voit une formule logique, il n'a pas pour
+habitude de la transformer en un plateau de démineur. C'est une
+méthode extrémement innefficace pour attaquer un problème
+logique. L'intérêt de cet réduction est tout autre. Cet réduction
+montre que, quiconque résoud le démineur aura aussi résolu les
+problèmes de logiques propositionnelles. Puisque les problèmes de
+logiques propositionnelles ont été énormément étudié depuis des
+décennies, et sont très dur, cela montre que le démineur est très dur
+aussi. Donc qu'il n'est probablement pas utile de s'attaquer à faire
+un programme qui résoud systématiquement n'importe quel plateau de
+démineur de manière efficace.
+
+Pour dire ça autrement, tout programme qui résoud tous les plateau de
+démineur soit:
+-sera lent sur certain plateau compliqué
+-sera rapide mais aura des erreurs
+-sera rapide, sans erreurs, et aura profondément révolutionné ce que
+les informaticiens pensaient savoir.
+
+{{Notes}}
+Une petite note technique d'abord. Le problèm de la satisfiabilité
+est un des exemples les plus classiques de problèmes NP-complet. La
+seconde réduction permet de montrer que le démineur est aussi
+NP-complet. (Il est triviallement dans NP, et la réduction est
+clairement en temps polynomial).
+
+Je remercie Pierre McKenzie, qui m'a fourni les images de plateau de
+démineur. Et surtout, qui a pris le temps de nous montrer ce résultat
+- magnifique autant que fantaisiste - quand je suivais son cours
+d'introduction à l'informatique théorique.
