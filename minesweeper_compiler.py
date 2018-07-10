@@ -70,6 +70,8 @@ for input_file in argv[1:]:
   size_x=(longest_line_size-1)*size
   size_y=line_number*size
   output="""<rect x="0" y="0" style="fill:white;stroke-width:0;" width="%d"  height="%d"/>%s"""%(size_x,size_y,output)
-  output="""<svg width="%d"  height="%d">%s</svg>"""%(size_x,size_y,output)
+  output="""<svg version="1.1"
+     baseProfile="full"
+     xmlns="http://www.w3.org/2000/svg" width="%d"  height="%d">%s</svg>"""%(size_x,size_y,output)
   with open(output_file, "w") as output_file:
     output_file.write(output)
